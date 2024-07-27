@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>Webinar Registration</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <script src="script.js" defer></script>
+</head>
+<body>
+
+<video id="bg-video-pc" autoplay muted loop>
+    <source src="jai2.mp4" type="video/mp4">
+    Your browser does not support the video tag.
+</video>
+<video id="bg-video-mobile" autoplay muted loop>
+    <source src="jai2.mp4" type="video/mp4">
+    Your browser does not support the video tag.
+</video>
+
+<div class="container">
+    <h1 class="form-title">CYBER AWARENESS WEBINAR</h1>
+    <h2 class="form-line">REGISTRATION</h2>
+
+    <form id="form">
+        <div class="main-user-info">
+            <div class="user-input-box">
+                <label for="firstName">First Name</label>
+                <input type="text" id="firstName" name="firstName" placeholder="Enter First Name" required />
+            </div>
+            <div class="user-input-box">
+                <label for="lastName">Last Name</label>
+                <input type="text" id="lastName" name="lastName" placeholder="Enter Last Name" required />
+            </div>
+            <div class="user-input-box">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" placeholder="Enter Email" required />
+            </div>
+            <div class="user-input-box">
+                <label for="phoneNumber">Phone Number</label>
+                <input type="text" id="phoneNumber" name="phoneNumber" placeholder="Enter Phone Number" required />
+            </div>
+            <div class="user-input-box">
+                <label for="state">Select State</label>
+                <select id="state" name="state" onchange="updateCities()" required>
+                    <option value="">--Select State--</option>
+                        <option value="AP">Andhra Pradesh</option>
+                        <option value="AR">Arunachal Pradesh</option>
+                        <option value="AS">Assam</option>
+                        <option value="BR">Bihar</option>
+                        <option value="CT">Chhattisgarh</option>
+                        <option value="GA">Goa</option>
+                        <option value="GJ">Gujarat</option>
+                        <option value="HR">Haryana</option>
+                        <option value="HP">Himachal Pradesh</option>
+                        <option value="JK">Jammu and Kashmir</option>
+                        <option value="JH">Jharkhand</option>
+                        <option value="KA">Karnataka</option>
+                        <option value="KL">Kerala</option>
+                        <option value="MP">Madhya Pradesh</option>
+                        <option value="MH">Maharashtra</option>
+                        <option value="MN">Manipur</option>
+                        <option value="ML">Meghalaya</option>
+                        <option value="MZ">Mizoram</option>
+                        <option value="NL">Nagaland</option>
+                        <option value="OR">Odisha</option>
+                        <option value="PB">Punjab</option>
+                        <option value="RJ">Rajasthan</option>
+                        <option value="SK">Sikkim</option>
+                        <option value="TN">Tamil Nadu</option>
+                        <option value="TG">Telangana</option>
+                        <option value="TR">Tripura</option>
+                        <option value="UP">Uttar Pradesh</option>
+                        <option value="UT">Uttarakhand</option>
+                        <option value="WB">West Bengal</option>
+                        <option value="AN">Andaman and Nicobar Islands</option>
+                        <option value="CH">Chandigarh</option>
+                        <option value="DN">Dadra and Nagar Haveli and Daman and Diu</option>
+                        <option value="LD">Lakshadweep</option>
+                        <option value="DL">Delhi</option>
+                        <option value="PY">Puducherry</option>
+                </select>
+            </div>
+
+            <div class="user-input-box">
+                <label for="city">Select City:</label>
+                <select id="city" name="city" required>
+                    <!-- City options here -->
+                </select>
+            </div>
+        </div>
+        <div class="gender-details-box">
+            <span class="gender-title">Profession</span>
+            <div class="gender-category">
+                <input type="radio" name="profession" id="working" value="WORKING" required />
+                <label for="working">WORKING</label>
+                <input type="radio" name="profession" id="student" value="STUDENT" />
+                <label for="student">STUDENT</label>
+                <input type="radio" name="profession" id="non-working" value="NON-WORKING" />
+                <label for="non-working">NON-WORKING</label>
+            </div>
+        </div>
+        
+        <div class="form-submit-btn">
+            <input type="submit" value="Register">
+        </div>
+    </form>
+</div>
+
+<script>
+document.getElementById('form').addEventListener('submit', function(event) {
+    event.preventDefault(); // Prevent default form submission
+
+    const form = event.target;
+    const formData = new FormData(form);
+
+    fetch('https://formspree.io/f/mqazpevq', {
+        method: 'POST',
+        body: formData,
+        headers: {
+            'Accept': 'application/json'
+        }
+    })
+    .then(response => {
+        if (response.ok) {
+            window.location.href = 'index2.html'; // Redirect on success
+        } else {
+            alert('There was an issue with your submission. Please try again.');
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        alert('There was an issue with your submission. Please try again.');
+    });
+});
+</script>
+
+</body>
+</html>
